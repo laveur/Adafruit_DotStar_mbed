@@ -54,7 +54,7 @@
   @return  Adafruit_DotStar object. Call the begin() function before use.
 */
 Adafruit_DotStar::Adafruit_DotStar(uint16_t n, PinName data, PinName clock,
-  uint8_t o) : dataPinName(data), dataPin(PinName::NC), clockPinName(clock), clockPin(PinName::NC),
+  uint8_t o) : dataPin(data), clockPin(clock),
   brightness(0), pixels(NULL), rOffset(o & 3), gOffset((o >> 2) & 3), bOffset((o >> 4) & 3)
 {
   updateLength(n);
@@ -125,8 +125,8 @@ void Adafruit_DotStar::updateLength(uint16_t n) {
            to outputs.
 */
 void Adafruit_DotStar::sw_spi_init(void) {
-  dataPin = DigitalOut(dataPinName);
-  clockPin = DigitalOut(clockPinName);
+  dataPin.output();
+  clockPin.output();
   dataPin.write(0);
   clockPin.write(0);
 }
@@ -135,8 +135,8 @@ void Adafruit_DotStar::sw_spi_init(void) {
   @brief   Stop 'soft' (bitbang) SPI. Data and clock pins are set to inputs.
 */
 void Adafruit_DotStar::sw_spi_end() {
-  dataPin = DigitalOut(NC);
-  clockPin = DigitalOut(NC);
+  dataPin.input();
+  clockPin.input();
 }
 
 #define spi_out(n) sw_spi_out(n)

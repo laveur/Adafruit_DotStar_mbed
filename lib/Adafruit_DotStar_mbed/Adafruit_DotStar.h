@@ -181,10 +181,8 @@ class Adafruit_DotStar {
  private:
 
   uint16_t          numLEDs;               ///< Number of pixels
-  PinName           dataPinName;           ///< If soft SPI, data pin #
-  DigitalOut        dataPin;               ///< Mbed Data Output Pin
-  PinName           clockPinName;          ///< If soft SPI, clock pin #
-  DigitalOut        clockPin;              ///< Mbed Clock Output Pin
+  DigitalInOut      dataPin;               ///< Mbed Data Output Pin
+  DigitalInOut      clockPin;              ///< Mbed Clock Output Pin
   uint8_t           brightness;            ///< Global brightness setting
   uint8_t          *pixels;                ///< LED RGB values (3 bytes ea.)
   uint8_t           rOffset;               ///< Index of red in 3-byte pixel
